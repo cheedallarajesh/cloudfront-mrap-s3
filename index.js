@@ -38,11 +38,15 @@ exports.handler = async (event) => {
     const method = request.method;
     const endpoint = `https://${request.origin.custom.domainName}${request.uri}`;
     console.log(`Endpoint: ${endpoint}`);
-    const region = '*'; // setting * doesn't work and forces to include a region. Having mrap, cannot have a single region.
-    // here is example authorization
+    // *********region issue**************
+    // setting * doesn't work and forces to include a region. Having mrap, cannot have a single region.
+    const region = '*'; 
+    // here is example generated Authorization
     //AWS4-HMAC-SHA256 Credential=xxxx/20241029/undefined/s3/aws4_request, SignedHeaders=accept-encoding;host;via;x-amz-content-sha256;x-amz-date;x-amz-security-token
     // undefined/s3 is what a malformed the request.
     // setting it to a valid region works but with mrap, cannot have a region hard-coded.
+    // ********* End of region issue**************
+    
     const service = 's3';
 
     const headers = request.headers;
